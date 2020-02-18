@@ -34,6 +34,20 @@ export function todoReducer( state = estadoInicial, action: fromTodo.Acciones ):
           }
         } );
 
+    case fromTodo.EDITAR_TODO:
+      return state.map( todoEdit => {
+        if ( todoEdit.id === action.id ) {
+          return {
+            //aqui el spread ... clona todas las propiedades del objeto
+            ...todoEdit,
+            // action es el objeto que se edita
+            texto: action.texto
+          } ;
+        } else {
+          return todoEdit;
+        }
+      } );
+
     default:
       return state;
   }
