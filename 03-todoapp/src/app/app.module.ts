@@ -14,6 +14,7 @@ import {todoReducer} from './todo/todo.reducer';
 import {environment} from '../environments/environment';
 import {ReactiveFormsModule} from '@angular/forms';
 import {APP_REDUCERS} from './app.reducers';
+import { FilterPipe } from './filter/filter.pipe';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {APP_REDUCERS} from './app.reducers';
     TodosListComponent,
     TodosItemComponent,
     TodosFooterComponent,
-    TodoAddComponent
+    TodoAddComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
