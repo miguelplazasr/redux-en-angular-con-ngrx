@@ -60,6 +60,12 @@ export function todoReducer( state = estadoInicial, action: fromTodo.Acciones ):
       // EL filter retorna un nuevo arreglo por eso funciona
       return state.filter( todoEdit => todoEdit.id !== action.id );
 
+    case fromTodo.BORRAR_ALL_TODO:
+      // EL filter retorna un nuevo arreglo por eso funciona
+      return state.filter( todoEdit => !todoEdit.completado );
+
+
+
     default:
       return state;
   }
