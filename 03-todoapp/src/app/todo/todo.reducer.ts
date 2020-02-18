@@ -19,6 +19,21 @@ export function todoReducer( state = estadoInicial, action: fromTodo.Acciones ):
       // con el spread ... estoy clonando el estado actual
       return [ ...state, todo ];
 
+      case fromTodo.TOGGLE_TODO:
+
+        // Se debe romper la referencia y enviar un nuevo T oDo para que redux funcione
+        return state.map( todoEdit => {
+          if (todoEdit.id === action.id ) {
+            return {
+              //aqui el spread ... clona todas las propiedades del objeto
+              ...todoEdit,
+              completado: !todoEdit.completado
+            } ;
+          } else {
+            return todoEdit;
+          }
+        } );
+
     default:
       return state;
   }

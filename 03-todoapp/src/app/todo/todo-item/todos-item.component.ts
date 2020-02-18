@@ -1,6 +1,9 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {TodoModel} from '../model/todo.model';
 import {FormControl, Validators} from '@angular/forms';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../app.reducers';
+import {ToggleTodoAction} from '../todo.actions';
 
 @Component({
   selector: 'app-todos-item',
@@ -12,21 +15,25 @@ export class TodosItemComponent implements OnInit {
   @Input() todo: TodoModel;
 
   // Con ViewChild puedo capturar el elemento del HTML
-  @ViewChild('txtInputFisico') txtInputFisico: ElementRef;
+  @ViewChild('txtInputFisico', '') txtInputFisico: ElementRef;
 
   chkField: FormControl;
   txtInput: FormControl;
 
   editando: boolean;
 
-  constructor() { }
+  constructor( private store: Store<AppState>) { }
 
   ngOnInit() {
     this.chkField = new FormControl( this.todo.completado );
     this.txtInput = new FormControl( this.todo.texto, Validators.required );
 
-    console.log(this.todo);
+    this.chkField.valueChanges
+      .subscribe( () => {
+        const accion = new ToggleTodoAction( this.todo.id );
 
+        this.store.dispatch( accion );
+      });
   }
 
   editar() {
