@@ -5,14 +5,9 @@
   <span class="todo-count"><strong>0</strong> ToDos pendientes</span>
   <!-- Remove this if you don't implement routing -->
   <ul class="filters">
-    <li>
-      <a class="selected" href="#/">Todos</a>
-    </li>
-    <li>
-      <a href="#/active">Activos</a>
-    </li>
-    <li>
-      <a href="#/completed">Completados</a>
+    <!-- selected -->
+    <li (click)="cambiarFiltro( filtro )" *ngFor="let filtro of filtrosValidos">
+      <a [ngClass]="{ 'selected': filtro === filtroActual }" >{{ filtro }}</a>
     </li>
   </ul>
   <!-- Hidden if no completed items are left ↓ -->
