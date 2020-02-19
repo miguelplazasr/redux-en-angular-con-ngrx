@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from './auth/login/login.component';
 import {RegisterComponent} from './auth/register/register.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
+import {dashboardRoutes} from './dashboard/dashboard.routes';
 
 
 const routes: Routes = [
@@ -16,7 +17,9 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: DashboardComponent
+    component: DashboardComponent,
+    // Lo inyecta directamente
+    children: dashboardRoutes
   },
   {
     path: '**',
