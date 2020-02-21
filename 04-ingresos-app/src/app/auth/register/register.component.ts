@@ -9,7 +9,7 @@ import {AuthService} from '../auth.service';
 export class RegisterComponent implements OnInit {
 
   constructor(
-    public _aut: AuthService
+    public auth: AuthService
   ) { }
 
   ngOnInit() {
@@ -17,6 +17,6 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(data: any) {
     console.log(data);
-    this._aut.crearUsuario( data.nombre, data.email, data.password );
+    this.auth.crearUsuario( data.nombre, data.email, data.password );
   }
 }
