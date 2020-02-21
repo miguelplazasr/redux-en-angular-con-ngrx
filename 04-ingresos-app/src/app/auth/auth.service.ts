@@ -8,6 +8,9 @@ import Swal from 'sweetalert2';
 import {map} from 'rxjs/operators';
 import {UserModel} from './user.model';
 import {AngularFirestore} from '@angular/fire/firestore';
+import {Store} from '@ngrx/store';
+import {AppState} from '../app.reducer';
+import {ActivarLoadingAction, DesactivarLoadingAction} from '../shared/ui.actions';
 // import 'firebase/firestore';
 
 @Injectable({
@@ -18,7 +21,8 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private afDb: AngularFirestore,
-    private router: Router
+    private router: Router,
+    private store: Store<AppState>
   ) {
   }
 
@@ -32,7 +36,7 @@ export class AuthService {
 
   crearUsuario(name: string, email: string, password: string) {
 
-    console.log( name );
+    this.store.dispatch( new ActivarLoadingAction() );
 
     this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then(resp => {
@@ -43,20 +47,19 @@ export class AuthService {
           email: resp.user.email
         };
 
-        console.log(user);
-
+        // Aqui se crea el documento del usuario en la base de datos firebase
         this.afDb.doc(`${ user.uid }/usuario`)
           .set( user )
           .then( () => {
             this.router.navigate(['/']);
+            this.store.dispatch( new DesactivarLoadingAction() );
           });
 
-
-
-        this.router.navigate(['/']);
       })
       .catch(err => {
         console.log(err);
+        this.store.dispatch( new DesactivarLoadingAction() );
+
         Swal.fire({
           title: 'Error en el login',
           text: err.message,
@@ -69,12 +72,18 @@ export class AuthService {
 
   login(email: string, password: string) {
 
+    this.store.dispatch( new ActivarLoadingAction());
+
     this.afAuth.auth
       .signInWithEmailAndPassword(email, password)
       .then(resp => {
         this.router.navigate(['/']);
+        this.store.dispatch( new DesactivarLoadingAction());
+
       })
       .catch(err => {
+        this.store.dispatch( new DesactivarLoadingAction());
+
         Swal.fire({
           title: 'Error en el login',
           text: err.message,
