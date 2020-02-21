@@ -11,12 +11,17 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {Store} from '@ngrx/store';
 import {AppState} from '../app.reducer';
 import {ActivarLoadingAction, DesactivarLoadingAction} from '../shared/ui.actions';
+import {SetUserAction} from './auth.actions';
+import {Subscription} from 'rxjs';
 // import 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  // Se inicializa para evitar el error que se presenta cuando se intenta ingresar a la aplicacion durectamente por la ruta , sin el login.
+  private userSubscription: Subscription = new Subscription();
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -31,12 +36,26 @@ export class AuthService {
     this.afAuth.authState.subscribe((fbUser: firebase.User) => {
 
       if ( fbUser ) {
-        this.afDb.doc(`${ fbUser.uid }/usuario`)
+        this.userSubscription = this.afDb.doc(`${ fbUser.uid }/usuario`)
           .valueChanges()
-          .subscribe( usrObj => {
+          .subscribe( (usrObj: any) => {
 
+            // El objeto usrObj no coincide con el modelo entonces ...
             console.log( usrObj );
-          } )
+
+            const newUser = new UserModel( usrObj );
+
+            this.store.dispatch( new SetUserAction( newUser ));
+            console.log( newUser );
+
+
+
+          } );
+      } else {
+
+        // Se debe cancelar la subscripcion porque va a estar escuchando cambios de cualquier usuario que se conecte
+
+        this.userSubscription.unsubscribe();
       }
 
     });
