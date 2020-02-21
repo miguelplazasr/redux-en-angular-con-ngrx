@@ -5,9 +5,8 @@ export interface State {
 }
 
 const initState: State = {
-  isLoading: false;
-}
-;
+  isLoading: false
+};
 
 export function uiReducer(state = initState, action: fromUI.actions): State {
 
