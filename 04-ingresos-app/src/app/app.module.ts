@@ -24,6 +24,7 @@ import {environment} from '../environments/environment';
 import { StoreModule } from '@ngrx/store';
 import {appReducers} from './app.reducer';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import { OrdenIngresoEgresoPipe } from './ingreso-egreso/orden-ingreso-egreso.pipe';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
     DetalleComponent,
     FooterComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    OrdenIngresoEgresoPipe
   ],
   imports: [
     BrowserModule,
