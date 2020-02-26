@@ -30,6 +30,7 @@ import {ChartsModule} from 'ng2-charts';
 
 // Modulos personalizados
 import {AuthModule} from './auth/auth.module';
+import {SharedModule} from './shared/shared.module';
 
 
 @NgModule({
@@ -41,14 +42,15 @@ import {AuthModule} from './auth/auth.module';
     IngresoEgresoComponent,
     EstadisticaComponent,
     DetalleComponent,
-    FooterComponent,
-    NavbarComponent,
-    SidebarComponent,
+    // FooterComponent, Se paso al SharedMOdule
+    // NavbarComponent, Se paso al SharedMOdule
+    // SidebarComponent, Se paso al SharedMOdule
     OrdenIngresoEgresoPipe
   ],
   imports: [
     BrowserModule,
     AuthModule,
+    SharedModule,
     AppRoutingModule,
     // FormsModule, Se elimina porque el aproch por template de los formularios solo esta en el AutModule
     ReactiveFormsModule,
