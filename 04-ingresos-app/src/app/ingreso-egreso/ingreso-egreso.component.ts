@@ -8,6 +8,9 @@ import {Store} from '@ngrx/store';
 import {AppState} from '../app.reducer';
 import {ActivarLoadingAction, DesactivarLoadingAction} from '../shared/ui.actions';
 
+
+import * as fromIngresoEgreso from './ingreso-egreso.reducer';
+
 @Component({
   selector: 'app-ingreso-egreso',
   templateUrl: './ingreso-egreso.component.html',
@@ -23,7 +26,7 @@ export class IngresoEgresoComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     public ingresoEgresoService: IngresoEgresoService,
-    private store: Store<AppState>
+    private store: Store<fromIngresoEgreso.AppState>
   ) {
   }
 

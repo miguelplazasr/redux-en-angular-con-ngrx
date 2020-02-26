@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Store} from '@ngrx/store';
+// Con el lazyLoad no se carga el AppState de la aplicacion si no el AppState de IngresoEgreso Reducer , la interface
 import {AppState} from '../../app.reducer';
+import * as fromIngresoEgreso from '../ingreso-egreso.reducer';
+
 import {Subscription} from 'rxjs';
 import {IngresoEgresoModel} from '../ingreso-egreso.model';
 
@@ -26,8 +29,9 @@ export class EstadisticaComponent implements OnInit {
 
 
   constructor(
-    private store: Store<AppState>
-  ) { }
+    //private store: Store<AppState> // Con el lazyLoad no se carga el AppState de la aplicacion si no el AppState de IngresoEgreso Reducer , la interface
+  private store: Store<fromIngresoEgreso.AppState>
+) { }
 
   ngOnInit() {
 

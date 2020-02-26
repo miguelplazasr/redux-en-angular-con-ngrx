@@ -1,9 +1,16 @@
 import * as fromIngresoEgreso from './ingreso-egreso.actions';
 import {IngresoEgresoModel} from './ingreso-egreso.model';
 import {Action} from '@ngrx/store';
+import { AppState} from '../app.reducer';
 
+//Esto se ve en el Redux navegador
 export interface IngresoEgresoState {
   items: IngresoEgresoModel[];
+}
+
+// Esto es una expansion del AppStateReducer
+export interface AppState extends AppState {
+  ingresoEgreso: IngresoEgresoState;
 }
 
 const InitState: IngresoEgresoState = {

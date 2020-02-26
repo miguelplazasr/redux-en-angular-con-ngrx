@@ -9,7 +9,8 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {ChartsModule} from 'ng2-charts';
 import {SharedModule} from '../shared/shared.module';
 import {DashboardRouting} from '../dashboard/dashboard.routing';
-
+import {StoreModule} from '@ngrx/store';
+import {IngresoEgresoReducer} from './ingreso-egreso.reducer';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {DashboardRouting} from '../dashboard/dashboard.routing';
     ReactiveFormsModule,
     ChartsModule,
     SharedModule,
-    DashboardRouting
+    DashboardRouting,
+    StoreModule.forFeature( 'ingresoEgreso', IngresoEgresoReducer ) // LazyLoad del reducer
   ]
 })
 export class IngresoEgresoModule { }
