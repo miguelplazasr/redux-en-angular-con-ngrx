@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
+import {ActivatedRouteSnapshot, CanActivate, CanLoad, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
 import {AuthService} from './auth.service';
+import {take} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardService implements CanActivate {
+export class AuthGuardService implements CanActivate, CanLoad {
 
   constructor(
     private authService: AuthService
@@ -17,6 +18,15 @@ export class AuthGuardService implements CanActivate {
     return this.authService.isAuthenticated();
   }
 
+  // Es necesario cancelar la subscription
+  canLoad() {
+    return this.authService.isAuthenticated()
+      .pipe(
+        // Solo toma una y cancela la subscription
+        take(1)
+      );
+
+  }
 
 
 }

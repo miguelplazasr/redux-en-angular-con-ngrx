@@ -18,7 +18,8 @@ const routes: Routes = [
   },
   {
     path: '',
-    loadChildren: './ingreso-egreso/ingreso-egreso.module#IngresoEgresoModule'
+    loadChildren: './ingreso-egreso/ingreso-egreso.module#IngresoEgresoModule',
+    canLoad: [ AuthGuardService ]
   },
   // Estas rutas se enviaron al dashboard.routind
   // {
