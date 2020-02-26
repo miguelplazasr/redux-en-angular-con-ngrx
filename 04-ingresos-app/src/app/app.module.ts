@@ -3,8 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
+
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { IngresoEgresoComponent } from './ingreso-egreso/ingreso-egreso.component';
 import { EstadisticaComponent } from './ingreso-egreso/estadistica/estadistica.component';
@@ -17,7 +16,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 // Firebase
 import {AngularFireModule} from '@angular/fire';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
-import {AngularFireAuthModule} from '@angular/fire/auth';
+
 import {environment} from '../environments/environment';
 
 // @ngrx
@@ -29,12 +28,15 @@ import { OrdenIngresoEgresoPipe } from './ingreso-egreso/orden-ingreso-egreso.pi
 // Charts
 import {ChartsModule} from 'ng2-charts';
 
+// Modulos personalizados
+import {AuthModule} from './auth/auth.module';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
+    // LoginComponent, Se paso al AuthModule
+    // RegisterComponent, Se paso al AuthModule
     DashboardComponent,
     IngresoEgresoComponent,
     EstadisticaComponent,
@@ -46,12 +48,13 @@ import {ChartsModule} from 'ng2-charts';
   ],
   imports: [
     BrowserModule,
+    AuthModule,
     AppRoutingModule,
-    FormsModule,
+    // FormsModule, Se elimina porque el aproch por template de los formularios solo esta en el AutModule
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireAuthModule,
+    // AngularFireAuthModule, Se paso al AuthModule
     StoreModule.forRoot(appReducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
