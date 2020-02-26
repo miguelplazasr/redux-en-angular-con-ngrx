@@ -16,6 +16,10 @@ const routes: Routes = [
     path: 'register',
     component: RegisterComponent
   },
+  {
+    path: '',
+    loadChildren: './ingreso-egreso/ingreso-egreso.module#IngresoEgresoModule'
+  },
   // Estas rutas se enviaron al dashboard.routind
   // {
   //   path: '',
