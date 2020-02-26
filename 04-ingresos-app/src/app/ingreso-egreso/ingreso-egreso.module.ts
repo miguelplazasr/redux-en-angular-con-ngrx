@@ -8,6 +8,7 @@ import {OrdenIngresoEgresoPipe} from './orden-ingreso-egreso.pipe';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ChartsModule} from 'ng2-charts';
 import {SharedModule} from '../shared/shared.module';
+import {DashboardRouting} from '../dashboard/dashboard.routing';
 
 
 
@@ -23,7 +24,8 @@ import {SharedModule} from '../shared/shared.module';
     CommonModule,
     ReactiveFormsModule,
     ChartsModule,
-    SharedModule
+    SharedModule,
+    DashboardRouting
   ]
 })
 export class IngresoEgresoModule { }

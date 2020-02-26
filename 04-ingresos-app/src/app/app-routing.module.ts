@@ -16,6 +16,7 @@ const routes: Routes = [
     path: 'register',
     component: RegisterComponent
   },
+  // Estas rutas se enviaron al dashboard.routind
   // {
   //   path: '',
   //   component: DashboardComponent,
