@@ -16,13 +16,13 @@ const routes: Routes = [
     path: 'register',
     component: RegisterComponent
   },
-  {
-    path: '',
-    component: DashboardComponent,
-    canActivate: [ AuthGuardService ],
-    // Lo inyecta directamente
-    children: dashboardRoutes
-  },
+  // {
+  //   path: '',
+  //   component: DashboardComponent,
+  //   canActivate: [ AuthGuardService ],
+  //   // Lo inyecta directamente
+  //   children: dashboardRoutes
+  // },
   {
     path: '**',
     redirectTo: ''
