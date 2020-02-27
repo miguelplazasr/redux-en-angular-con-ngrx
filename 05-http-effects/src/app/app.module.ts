@@ -5,6 +5,7 @@ import { AppRouting } from './app.routing';
 import { AppComponent } from './app.component';
 import {SharedModule} from './shared/shared.module';
 import {UsuariosModule} from './usuarios/usuarios.module';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import {UsuariosModule} from './usuarios/usuarios.module';
   imports: [
     BrowserModule,
     AppRouting,
+    HttpClientModule,
     SharedModule,
     UsuariosModule
   ],
